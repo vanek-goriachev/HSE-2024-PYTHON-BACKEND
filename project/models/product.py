@@ -1,25 +1,30 @@
 class Product:
+    DEFAULT_SALE = 0
+
     def __init__(self, name, category, price):
         self.name = name
         self.category = category
         self.price = price
-        self.sale = 0
+        self.sale = self.DEFAULT_SALE
 
     def edit_category(self, new_category):
-        pass
+        self.category = new_category
 
     def edit_price(self, new_price):
-        pass
+        self.price = new_price
 
     def set_sale(self, sale):
-        pass
+        self.sale = sale
 
     def cancel_sale(self):
-        pass
+        self.sale = self.DEFAULT_SALE
 
     def get_price(self):
-        # Это не тупо геттер - тут надо учесть скидку и еще то, что скидка указана в процентах
-        pass
+        return self.price * sale_to_multiplier(self.sale)
 
-    def __repr__(self):
-        pass
+    def __repr__(self) -> str:
+        return f"<Product {self.name}>"
+
+
+def sale_to_multiplier(sale):
+    return (100 - sale) / 100
